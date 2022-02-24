@@ -128,9 +128,48 @@ If someone is interest on this, they need to give us information. But we see nec
 
 ### About the prices
 
-The prices are the icon images of point markers but edited. How we do that?
+- The prices are basically the icon images of point markers but edited. How we do that?
+- First of all this is the documentation. 
+[https://developers.google.com/maps/documentation/javascript/examples/marker-simple](https://developers.google.com/maps/documentation/javascript/examples/marker-simple)
+- And how to edit the point mark to another icon and put content into the icon, this is the documentation. 
+[https://stackoverflow.com/questions/40979600/create-a-google-map-marker-containing-price](https://stackoverflow.com/questions/40979600/create-a-google-map-marker-containing-price)
 
-First of all this is the documentation.
+Basically we need to use an image or icon from google. 
+
+```javascript
+var image = {
+          url: 'OUR-IMAGE-FROM-GOOGLE',
+          // This marker is 35 pixels wide by 35 pixels high.
+          size: new google.maps.Size(35, 35),
+          // The origin for this image is (0, 0).
+          origin: new google.maps.Point(0, 0),
+          // The anchor for this image is the base of the flagpole at (0, 32).
+          anchor: new google.maps.Point(0, 35)
+        };
+```
+
+And then create a variable that is the price, of course our idea is create an script that can put this price automatically based on the data from the user property. 
+
+```javascript
+var clickMarker = new google.maps.Marker({
+    position: map.getCenter(),
+    map: map,
+    draggable: true,
+    icon: image,
+    label: {
+      text: "50€", THIS WOULD BE THE PRICE
+      color: 'white',
+      fontSize: '15px',
+      fontWeight: 'bold'
+    }
+  });
+```
+
+**And this is an example**
+
+![Example icon price image](https://user-images.githubusercontent.com/80364422/155444272-4f0a66d3-baa6-4e97-93b5-3d8bba2c757b.png)
+
+***As we can see, there is an icon and a price***
 
 # Drawbacks
 
@@ -138,6 +177,7 @@ First of all this is the documentation.
 -   We don’t know how many experience in react our team members has. So we need to have in mind maybe the possibility of more **carry overs.**
 -   We don’t know how many experience in more big APIs like Google Maps our team members has. So we need to have in mind maybe the possibility of more **carry overs.**
 -   How partners are going to add in the map their point locations to future reservations by the users. Right now we didn’t see in the Figma design file any plans for it.
+- There’s gonna be an impact of time if we didn’t worked before with DB. That’s because there is a part of our proposals that we need to use information from the USERS TEAM DB. 
 
 # Alternatives
 
@@ -148,7 +188,15 @@ We have other services, the problem is the amount of documentation of Google Map
 ## Adoption strategy
 
 -   We think Google Maps API implementation will not going to “ break” our team and the C9 cohort will be feel more comfortable because the amount of documentation and tutorials that we can find going to help us a lot to be more efficient results.
+- At least our team needs to coordinate with the users team, because they have information in their DB about users and it can be more practical take information from their DB.
+
+# How we teach this
+- We have the necessity of read a lot of documentation, and not just that. Make a research about real situations, for example we didn’t find how to change the icon instead of someone of another webpage in the Google’s documentation.
+
+- We decided to call or divide this RFC in 2 subtopics. How integrate Googles Map API in the web page, and How to put prices. So it can be more easy to understand if you are from other team. Of course all the explanation is dense, but with this “subtopics” you quickly understand on what this is focused.
 
 # Unresolved questions
 
 -   We are on charge about how to make locations points, but we don’t see the design page on the figma file, but this is more related in a global way than a problem in the project.
+
+- There is more alternatives about the automatically script to put prices over the map? Until now, yes. We didn’t thought or know a better alternative, but of course this can be changed if it’s too hard. 
